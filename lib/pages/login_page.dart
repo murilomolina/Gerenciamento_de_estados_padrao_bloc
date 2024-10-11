@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -8,18 +9,19 @@ class LoginPage extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(20.0),
       child: Column(
-        children: [emailField(), senhaField(), botaoEnvia()],
+        children: [emailField(), passwordField(), loginButton()],
       ),
     );
   }
 
   Widget emailField() {
     return Container(
-      margin: const EdgeInsets.all(20.0),
+      margin: const EdgeInsets.symmetric(vertical:  20.0),
       child: TextField(
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
-            hintText: 'Insira seu e-mail',
+            hintText: 'seu@email.com',
+            labelText: 'Insira seu e-mail',
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
             filled: true),
@@ -27,14 +29,15 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget senhaField() {
+  Widget passwordField() {
     return Container(
-      margin: const EdgeInsets.all(50.0),
+      margin: const EdgeInsets.symmetric(vertical:  20.0),
       child: TextField(
         keyboardType: TextInputType.visiblePassword,
         obscureText: true,
         decoration: InputDecoration(
             hintText: 'Senha',
+            labelText: 'Digite sua senha',
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
             filled: true),
@@ -42,11 +45,17 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget botaoEnvia() {
-    return ElevatedButton(
-        onPressed: () {
-          print('logou ou não...');
-        },
-        child: const Text('Enviar'));
+  Widget loginButton() {
+    return Row(
+      children: [
+        Expanded(
+          child: ElevatedButton(
+              onPressed: () {
+                print('logou ou não...');
+              },
+              child: const Text('Login')),
+        ),
+      ],
+    );
   }
 }
