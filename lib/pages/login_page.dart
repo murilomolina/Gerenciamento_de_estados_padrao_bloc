@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import '../blocs/bloc.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatelessWidget{
   const LoginPage({super.key});
 
   @override
@@ -15,23 +15,30 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget emailField() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical:  20.0),
-      child: TextField(
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-            hintText: 'seu@email.com',
-            labelText: 'Insira seu e-mail',
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-            filled: true),
-      ),
-    );
+    return StreamBuilder(
+        stream: bloc.email,
+        builder: (contex, snapshot) {
+          return Container(
+            margin: const EdgeInsets.symmetric(vertical: 20.0),
+            child: TextField(
+              onChanged: (valorDigitado){
+                bloc.changeEmail(valorDigitado);
+              },
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                  hintText: 'seu@email.com',
+                  labelText: 'Insira seu e-mail',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0)),
+                  filled: true),
+            ),
+          );
+        });
   }
 
   Widget passwordField() {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical:  20.0),
+      margin: const EdgeInsets.symmetric(vertical: 20.0),
       child: TextField(
         keyboardType: TextInputType.visiblePassword,
         obscureText: true,
