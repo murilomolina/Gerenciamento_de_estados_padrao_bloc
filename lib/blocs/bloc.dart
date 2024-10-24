@@ -17,4 +17,4 @@ class Bloc with Validators{
     _passwordController.close();
   }
 }
-final bloc = Bloc();
+// final bloc = Bloc(); // instancia global

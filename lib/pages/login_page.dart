@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import '../blocs/bloc.dart';
+import 'package:gerenciamento_estado/blocs/provider.dart';
 
 class LoginPage extends StatelessWidget{
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final bloc = Provider.of(context);
     return Container(
       margin: const EdgeInsets.all(20.0),
       child: Column(
-        children: [emailField(), passwordField(), loginButton()],
+        children: [emailField(bloc), passwordField(bloc), loginButton(bloc)],
       ),
     );
   }
 
-  Widget emailField() {
+  Widget emailField(bloc) {
     return StreamBuilder(
         stream: bloc.email,
         builder: (contex, AsyncSnapshot <String> snapshot) {
@@ -37,7 +38,7 @@ class LoginPage extends StatelessWidget{
         });
   }
 
-  Widget passwordField() {
+  Widget passwordField(bloc) {
 
     return StreamBuilder(
       stream: bloc.password,
@@ -63,17 +64,26 @@ class LoginPage extends StatelessWidget{
     );
   }
 
-  Widget loginButton() {
-    return Row(
-      children: [
-        Expanded(
-          child: ElevatedButton(
-              onPressed: () {
-                print('logou ou não...');
-              },
-              child: const Text('Login')),
-        ),
-      ],
-    );
+  Widget loginButton(bloc) {
+    return StreamBuilder(stream: bloc.email, 
+      builder: (context, AsyncSnapshot <String> snapshot){
+        return ElevatedButton(onPressed:() {
+          
+        },
+        child: Text('Logar'));
+      }
+      );
+    
+    // return Row(
+    //   children: [
+    //     Expanded(
+    //       child: ElevatedButton(
+    //           onPressed: () {
+    //             print('logou ou não...');
+    //           },
+    //           child: const Text('Login')),
+    //     ),
+    //   ],
+    // );
   }
 }
