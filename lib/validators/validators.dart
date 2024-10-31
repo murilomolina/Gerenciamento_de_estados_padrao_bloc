@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:email_validator/email_validator.dart';
 
+// mixin é quando voce quer incluir funções sem herança
 mixin Validators{
     final validateEmail = StreamTransformer<String, String>.fromHandlers(
         handleData: (email, sink){
